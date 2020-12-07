@@ -36,6 +36,7 @@ NSString * const POST_BACK_URL = @"https://demo.cloudpayments.ru/WebFormPost/Get
                 self->webView = [[WKWebView alloc] initWithFrame:viewController.view.frame configuration:configuration];
                 [self->webView setNavigationDelegate: self];
                 [viewController.view addSubview:self->webView];
+                [self->webView loadData:data MIMEType:[response MIMEType] characterEncodingName:[response textEncodingName] baseURL:[response URL]];
             } else {
                 NSString *messageString = [NSString stringWithFormat:@"Unable to load 3DS autorization page.\nStatus code: %d", (unsigned int)[(NSHTTPURLResponse *)response statusCode]];
                 [delegate authorizationFailedWithHtml:messageString];
