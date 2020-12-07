@@ -29,7 +29,7 @@ NSString * const POST_BACK_URL = @"https://demo.cloudpayments.ru/WebFormPost/Get
 
     [[NSURLCache sharedURLCache] removeCachedResponseForRequest: request];
     
-    [NSURLSession.sharedSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[NSURLSession.sharedSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (([(NSHTTPURLResponse *)response statusCode] == 200 || [(NSHTTPURLResponse *)response statusCode] == 201)) {
                 WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
@@ -41,7 +41,7 @@ NSString * const POST_BACK_URL = @"https://demo.cloudpayments.ru/WebFormPost/Get
                 [delegate authorizationFailedWithHtml:messageString];
             }
         });
-    }];
+    }] resume];
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
