@@ -12,9 +12,10 @@ extern NSString * const  POST_BACK_URL;
 
 @interface D3DS : NSObject <WKNavigationDelegate>
 {
-    UIViewController<D3DSDelegate> *viewControllerD3DSDelegate;
+    id<D3DSDelegate> d3DSDelegate;
     WKWebView *webView;
 }
 -(void) make3DSPaymentWithUIViewController: (UIViewController<D3DSDelegate> *) viewController andAcsURLString: (NSString *) acsUrlString andPaReqString: (NSString *) paReqString andTransactionIdString: (NSString *) transactionIdString;
+-(void) make3DSPaymentWithUIViewController: (UIViewController *) viewController delegate:(id<D3DSDelegate>)delegate andAcsURLString: (NSString *) acsUrlString andPaReqString: (NSString *) paReqString andTransactionIdString: (NSString *) transactionIdString;
 
 @end
