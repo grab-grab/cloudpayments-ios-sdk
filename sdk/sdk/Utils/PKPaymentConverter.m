@@ -8,6 +8,8 @@
 +(NSString *) convertToString:(PKPayment *)payment {
     
     NSDictionary *paymentDataDictionary = [NSJSONSerialization JSONObjectWithData:payment.token.paymentData options:NSJSONReadingMutableContainers error:nil];
+
+    if (!paymentDataDictionary) { return nil; }
     
     NSString *paymentType = @"";
     switch (payment.token.paymentMethod.type) {
